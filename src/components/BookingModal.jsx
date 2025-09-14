@@ -73,9 +73,7 @@ const BookingModal = ({ isOpen, onClose, selectedPlan }) => {
         </button>
 
         <h3 className="font-bold text-4xl mb-4 text-center bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-          {selectedPlan
-            ? `Booking: ${selectedPlan} Plan`
-            : "Enroll Now"}
+          {selectedPlan ? `Booking: ${selectedPlan} Plan` : "Enroll Now"}
         </h3>
         <p className="text-center text-base-content/70 mb-8">
           {selectedPlan
@@ -92,8 +90,8 @@ const BookingModal = ({ isOpen, onClose, selectedPlan }) => {
               Get instant answers and discuss your enrollment directly.
             </p>
             <a
-              href={`https://wa.me/2349068149540?text=${encodeURIComponent(
-                `Hello! I'm interested in enrolling in Codeket School${
+              href={`https://wa.me/2349063503232?text=${encodeURIComponent(
+                `Hello! I'm interested in enrolling in Codeket School ${
                   selectedPlan || "general"
                 } plan.`
               )}`}
