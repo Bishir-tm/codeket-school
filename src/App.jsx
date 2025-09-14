@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import BookingModal from "./components/BookingModal";
 import {
   Play,
   X,
@@ -39,6 +40,8 @@ import {
 const CodeketSchoolLanding = () => {
   const [theme, setTheme] = useState("light");
   const [showDemoModal, setShowDemoModal] = useState(false);
+  const [showBookingModal, setShowBookingModal] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
@@ -93,7 +96,7 @@ const CodeketSchoolLanding = () => {
       icon: UserCheck,
       title: "Effortless Attendance & Grading",
       desc: "Quick attendance marking and grade entry that teachers actually want to use",
-      benefit: "Save 16+ hours weekly on admin tasks",
+      benefit: "Save 16+ hours weekly on administrative tasks",
     },
     {
       icon: Bell,
@@ -181,7 +184,11 @@ const CodeketSchoolLanding = () => {
       label: "Avg. Fee Collection Improvement",
       icon: TrendingUp,
     },
-    { number: "16hrs", label: "Admin Hours Saved Weekly", icon: Clock },
+    {
+      number: "16hrs",
+      label: "Administrative Hours Saved Weekly",
+      icon: Clock,
+    },
     { number: "5 days", label: "Average Setup Time", icon: Zap },
   ];
 
@@ -205,9 +212,11 @@ const CodeketSchoolLanding = () => {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <div className="flex items-center space-x-4">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-lg">C</span>
-              </div>
+              <img
+                src="/logo.png"
+                alt="Codeket School Logo"
+                className="w-10 h-10"
+              />
               <div>
                 <div className="text-2xl font-bold text-gray-900 dark:text-white">
                   Codeket
@@ -253,7 +262,13 @@ const CodeketSchoolLanding = () => {
                 )}
               </button>
 
-              <button className="hidden md:flex btn bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold">
+              <button
+                onClick={() => {
+                  setSelectedPlan(null);
+                  setShowBookingModal(true);
+                }}
+                className="hidden md:flex btn bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold"
+              >
                 Book Free Demo
               </button>
 
@@ -314,7 +329,11 @@ const CodeketSchoolLanding = () => {
             <div className="text-center pb-8">
               <button
                 className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold text-lg"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => {
+                  setSelectedPlan(null);
+                  setShowBookingModal(true);
+                  setIsMobileMenuOpen(false);
+                }}
               >
                 Book Free Demo
               </button>
@@ -327,15 +346,6 @@ const CodeketSchoolLanding = () => {
       <section className="min-h-screen flex items-center justify-center pt-20 relative">
         <div className="container mx-auto px-6 text-center relative z-10">
           <div className="max-w-6xl mx-auto">
-            {/* Trust Badge */}
-            <div className="inline-flex items-center space-x-2 bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-full px-6 py-3 mb-8">
-              <Shield className="w-5 h-5 text-blue-600" />
-              <span className="text-sm font-medium text-blue-700 dark:text-blue-300">
-                Trusted by 500+ Private Schools in Nigeria
-              </span>
-              <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-            </div>
-
             {/* Main Headline */}
             <h1 className="text-5xl lg:text-7xl font-bold mb-8 leading-tight">
               <span className="text-gray-900 dark:text-white">
@@ -343,15 +353,15 @@ const CodeketSchoolLanding = () => {
               </span>
               <br />
               <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-                Manual School Admin
+                Manual School Management
               </span>
             </h1>
 
             {/* Subheadline */}
             <p className="text-xl lg:text-2xl text-gray-600 dark:text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed">
-              The offline-capable school management system that reduces admin
-              work by 40%+, stops fee leakage, and works reliably even when your
-              internet doesn't.
+              The offline-capable school management system that reduces
+              administrative work by 40%+, stops fee leakage, and works reliably
+              even when your internet doesn't.
             </p>
 
             {/* Hero CTAs */}
@@ -364,7 +374,13 @@ const CodeketSchoolLanding = () => {
                 Watch 2-Minute Demo
               </button>
 
-              <button className="border-2 border-gray-300 dark:border-gray-600 hover:border-blue-600 dark:hover:border-blue-500 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-500 px-8 py-4 rounded-lg font-semibold text-lg transition-all hover:scale-105">
+              <button
+                onClick={() => {
+                  setSelectedPlan(null);
+                  setShowBookingModal(true);
+                }}
+                className="border-2 border-gray-300 dark:border-gray-600 hover:border-blue-600 dark:hover:border-blue-500 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-500 px-8 py-4 rounded-lg font-semibold text-lg transition-all hover:scale-105"
+              >
                 Book Free Consultation
                 <ArrowRight className="w-5 h-5 ml-2 inline" />
               </button>
@@ -394,35 +410,43 @@ const CodeketSchoolLanding = () => {
       </section>
 
       {/* Demo Video Modal */}
-      {showDemoModal && (
-        <div className="fixed inset-0 z-[1000] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="relative bg-white dark:bg-gray-900 rounded-2xl max-w-4xl w-full">
-            <button
-              onClick={() => setShowDemoModal(false)}
-              className="absolute -top-4 -right-4 bg-white dark:bg-gray-800 rounded-full p-2 shadow-xl hover:scale-110 transition-transform z-10"
-            >
-              <X className="w-6 h-6" />
-            </button>
+      <section id="demo">
+        {showDemoModal && (
+          <div className="fixed inset-0 z-[1000] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+            <div className="relative bg-white dark:bg-gray-900 rounded-2xl max-w-4xl w-full">
+              <button
+                onClick={() => setShowDemoModal(false)}
+                className="absolute -top-4 -right-4 bg-white dark:bg-gray-800 rounded-full p-2 shadow-xl hover:scale-110 transition-transform z-10"
+              >
+                <X className="w-6 h-6" />
+              </button>
 
-            <div className="p-6">
-              <div className="aspect-video bg-gray-100 dark:bg-gray-800 rounded-xl flex items-center justify-center">
-                <div className="text-center">
-                  <Play className="w-16 h-16 text-blue-600 mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold mb-2">
-                    Codeket School Demo
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    See how we help schools reduce admin and increase revenue
-                  </p>
-                  <button className="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg">
-                    Play Demo Video
-                  </button>
+              <div className="p-6">
+                <div
+                  className="w-full"
+                  style={{ paddingBottom: "56.25%", position: "relative" }}
+                >
+                  <iframe
+                    className="absolute top-0 left-0 w-full h-full"
+                    src="https://www.youtube.com/embed/x4CzgUmA8j8"
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </section>
+
+      {/* Booking Modal */}
+      <BookingModal
+        isOpen={showBookingModal}
+        onClose={() => setShowBookingModal(false)}
+        selectedPlan={selectedPlan}
+      />
 
       {/* Pain Points Section */}
       <section className="py-32 bg-gray-50 dark:bg-gray-800">
@@ -600,6 +624,10 @@ const CodeketSchoolLanding = () => {
                     </div>
 
                     <button
+                      onClick={() => {
+                        setSelectedPlan(tier.name);
+                        setShowBookingModal(true);
+                      }}
                       className={`w-full py-3 rounded-lg font-semibold transition-all ${
                         tier.popular
                           ? "bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:scale-105"
@@ -620,8 +648,8 @@ const CodeketSchoolLanding = () => {
               <Shield className="w-6 h-6 text-green-500" />
               <span className="font-semibold text-green-700 dark:text-green-400">
                 ROI Guarantee: If you don't see measurable improvement in fee
-                collection and admin efficiency within the first term, we extend
-                support free until you do.
+                collection and administrative efficiency within the first term,
+                we extend support free until you do.
               </span>
             </div>
           </div>
@@ -645,12 +673,12 @@ const CodeketSchoolLanding = () => {
           <h2 className="text-4xl lg:text-5xl font-bold mb-8">
             Ready to Stop Losing Money on
             <br />
-            Manual Admin Work?
+            Manual Administrative Work?
           </h2>
           <p className="text-xl opacity-90 mb-12 max-w-3xl mx-auto">
-            Join 500+ schools that have reduced admin burden, improved fee
-            collection, and gained control over their operations with Codeket
-            School.
+            Join 500+ schools that have reduced administrative burden, improved
+            fee collection, and gained control over their operations with
+            Codeket School.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
@@ -664,7 +692,13 @@ const CodeketSchoolLanding = () => {
             </button>
           </div>
 
-          <button className="bg-white/20 backdrop-blur-sm border border-white/30 text-white px-12 py-4 rounded-lg font-semibold text-lg hover:scale-105 transition-all">
+          <button
+            onClick={() => {
+              setSelectedPlan(null);
+              setShowBookingModal(true);
+            }}
+            className="bg-white/20 backdrop-blur-sm border border-white/30 text-white px-12 py-4 rounded-lg font-semibold text-lg hover:scale-105 transition-all"
+          >
             <Calendar className="w-5 h-5 mr-2 inline" />
             Book Free Demo & Consultation
             <ArrowRight className="w-5 h-5 ml-2 inline" />
@@ -693,9 +727,11 @@ const CodeketSchoolLanding = () => {
           <div className="grid md:grid-cols-4 gap-8 mb-12">
             <div className="md:col-span-2">
               <div className="flex items-center space-x-4 mb-6">
-                <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-xl flex items-center justify-center">
-                  <span className="text-white font-bold text-xl">C</span>
-                </div>
+                <img
+                  src="/logo.png"
+                  alt="Codeket School Logo"
+                  className="w-12 h-12"
+                />
                 <div>
                   <div className="text-2xl font-bold text-white">Codeket</div>
                   <div className="text-sm opacity-70">
@@ -812,10 +848,6 @@ const CodeketSchoolLanding = () => {
               <div className="flex items-center space-x-2 opacity-60">
                 <CheckCircle2 className="w-4 h-4" />
                 <span className="text-xs">99.9% Uptime</span>
-              </div>
-              <div className="flex items-center space-x-2 opacity-60">
-                <Award className="w-4 h-4" />
-                <span className="text-xs">500+ Schools</span>
               </div>
             </div>
           </div>
