@@ -129,7 +129,7 @@ const CodeketSchoolLanding = () => {
     {
       name: "Starter",
       students: "Up to 200",
-      price: "₦150,000",
+      price: "₦200,000",
       period: "per term",
       features: [
         "All core features included",
@@ -145,7 +145,7 @@ const CodeketSchoolLanding = () => {
     {
       name: "Growth",
       students: "201 - 600",
-      price: "₦150,000 + ₦750",
+      price: "₦200,000 + ₦750",
       period: "base + per extra student",
       features: [
         "Everything in Starter",
@@ -161,7 +161,7 @@ const CodeketSchoolLanding = () => {
     {
       name: "Scale",
       students: "601+ students",
-      price: "₦150,000 + ₦1,000",
+      price: "₦200,000 + ₦1,000",
       period: "base + per extra student",
       features: [
         "Everything in Growth",
@@ -556,101 +556,158 @@ const CodeketSchoolLanding = () => {
       {/* Pricing Section */}
       <section id="pricing" className="py-32 bg-gray-50 dark:bg-gray-800">
         <div className="container mx-auto px-6">
-          <div className="text-center mb-20">
+          <div className="text-center mb-16">
             <div className="inline-block bg-green-100 dark:bg-green-900/30 rounded-full px-6 py-2 mb-6">
               <span className="text-sm font-semibold text-green-600">
-                TRANSPARENT PRICING
+                SIMPLE & TRANSPARENT
               </span>
             </div>
             <h2 className="text-4xl lg:text-5xl font-bold mb-6">
               <span className="bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
-                Predictable.
+                One Simple Price.
               </span>{" "}
-              Affordable. Fair.
+              For Every School.
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              Per-term pricing that scales with your school. No hidden fees, no
-              vendor lock-in.
+              No tiers, no hidden fees, no surprises. Pay only for the students
+              you have.
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {pricingTiers.map((tier, index) => (
-              <div
-                key={index}
-                className={`relative ${tier.popular ? "lg:-mt-8" : ""}`}
-              >
-                {tier.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
-                    <div className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-6 py-2 rounded-full text-sm font-semibold shadow-lg">
-                      Most Popular
+          {/* Main Pricing Card */}
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white dark:bg-gray-900 rounded-3xl border-2 border-blue-500 shadow-2xl overflow-hidden">
+              <div className="grid lg:grid-cols-2">
+                {/* Left Side - Main Price */}
+                <div className="bg-gradient-to-br from-blue-600 to-cyan-500 text-white p-12 lg:p-16">
+                  <div className="text-center lg:text-left">
+                    <div className="inline-flex items-center bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
+                      <Star className="w-4 h-4 mr-2" />
+                      <span className="text-sm font-semibold">
+                        Most Popular
+                      </span>
                     </div>
-                  </div>
-                )}
 
-                <div
-                  className={`bg-white dark:bg-gray-900 rounded-2xl border-2 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${
-                    tier.popular
-                      ? "border-blue-500 shadow-xl"
-                      : "border-gray-200 dark:border-gray-700 hover:border-blue-500/50"
-                  }`}
-                >
-                  <div className="p-8">
-                    <div className="text-center mb-8">
-                      <h3 className="text-2xl font-bold mb-2">{tier.name}</h3>
-                      <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
-                        {tier.students} students
-                      </p>
-                      <div className="text-3xl font-bold text-blue-600 mb-1">
-                        {tier.price}
+                    <h3 className="text-3xl lg:text-4xl font-bold mb-4">
+                      Flat Rate Pricing
+                    </h3>
+
+                    <div className="flex items-baseline justify-center lg:justify-start space-x-2 mb-2">
+                      <span className="text-5xl lg:text-6xl font-bold">
+                        ₦1,000
+                      </span>
+                      <span className="text-xl opacity-90">per term</span>
+                    </div>
+
+                    <div className="text-lg opacity-90 mb-2">per student</div>
+
+                    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 mt-8">
+                      <div className="text-sm opacity-90 mb-2">
+                        Example for 200 students:
                       </div>
-                      <p className="text-gray-600 dark:text-gray-400 text-sm">
-                        {tier.period}
-                      </p>
+                      <div className="text-2xl font-bold">
+                        ₦200,000 per term
+                      </div>
                     </div>
-
-                    <div className="space-y-4 mb-8">
-                      {tier.features.map((feature, fIndex) => (
-                        <div
-                          key={fIndex}
-                          className="flex items-start space-x-3"
-                        >
-                          <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                          <span className="text-sm text-gray-700 dark:text-gray-300">
-                            {feature}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-
-                    <button
-                      onClick={() => {
-                        setSelectedPlan(tier.name);
-                        setShowBookingModal(true);
-                      }}
-                      className={`w-full py-3 rounded-lg font-semibold transition-all ${
-                        tier.popular
-                          ? "bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:scale-105"
-                          : "border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
-                      }`}
-                    >
-                      Choose {tier.name}
-                    </button>
                   </div>
                 </div>
+
+                {/* Right Side - Features & Details */}
+                <div className="p-12 lg:p-16">
+                  <div className="space-y-6">
+                    <div className="flex items-start space-x-4">
+                      <div className="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                        <Check className="w-4 h-4 text-green-600" />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-lg mb-1">
+                          All Features Included
+                        </h4>
+                        <p className="text-gray-600 dark:text-gray-400 text-sm">
+                          Get access to every feature - no limitations
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start space-x-4">
+                      <div className="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                        <Check className="w-4 h-4 text-green-600" />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-lg mb-1">
+                          Pay Only For Active Students
+                        </h4>
+                        <p className="text-gray-600 dark:text-gray-400 text-sm">
+                          Billed per term based on actual enrollment
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start space-x-4">
+                      <div className="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                        <Check className="w-4 h-4 text-green-600" />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-lg mb-1">
+                          No Setup Fees
+                        </h4>
+                        <p className="text-gray-600 dark:text-gray-400 text-sm">
+                          Complete implementation included at no extra cost
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start space-x-4">
+                      <div className="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                        <Check className="w-4 h-4 text-green-600" />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-lg mb-1">
+                          Human Support Included
+                        </h4>
+                        <p className="text-gray-600 dark:text-gray-400 text-sm">
+                          Phone, WhatsApp, and email support with real people
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* CTA Button */}
+                  <button
+                    onClick={() => {
+                      setSelectedPlan("Flat Rate - ₦1,000/student");
+                      setShowBookingModal(true);
+                    }}
+                    className="w-full mt-8 bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl font-semibold text-lg transition-all hover:scale-105 shadow-lg"
+                  >
+                    Get Started Today
+                  </button>
+                </div>
               </div>
-            ))}
+            </div>
           </div>
 
-          {/* ROI Guarantee */}
-          <div className="mt-20 text-center">
-            <div className="inline-flex items-center space-x-3 bg-green-100 dark:bg-green-900/30 border border-green-500/20 rounded-full px-8 py-4">
-              <Shield className="w-6 h-6 text-green-500" />
-              <span className="font-semibold text-green-700 dark:text-green-400">
-                ROI Guarantee: If you don't see measurable improvement in fee
-                collection and administrative efficiency within the first term,
-                we extend support free until you do.
-              </span>
+          {/* Value Proposition */}
+          <div className="text-center mt-16">
+            <div className="inline-flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-8 bg-white dark:bg-gray-800 rounded-2xl px-8 py-6 border border-gray-200 dark:border-gray-700">
+              <div className="flex items-center space-x-3">
+                <Shield className="w-6 h-6 text-green-500" />
+                <span className="font-semibold text-gray-700 dark:text-gray-300">
+                  All Features Included
+                </span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <DollarSign className="w-6 h-6 text-green-500" />
+                <span className="font-semibold text-gray-700 dark:text-gray-300">
+                  No Hidden Fees
+                </span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Clock className="w-6 h-6 text-green-500" />
+                <span className="font-semibold text-gray-700 dark:text-gray-300">
+                  Cancel Anytime
+                </span>
+              </div>
             </div>
           </div>
         </div>

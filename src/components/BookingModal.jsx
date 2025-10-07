@@ -56,6 +56,7 @@ const BookingModal = ({ isOpen, onClose, selectedPlan }) => {
       },
       (error) => {
         setIsSending(false);
+        console.log(error);
         console.log("FAILED...", error.text);
         alert("Failed to send message. Please try again later.");
       }
@@ -64,7 +65,7 @@ const BookingModal = ({ isOpen, onClose, selectedPlan }) => {
 
   return (
     <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black bg-opacity-70 backdrop-blur-sm p-4">
-      <div className="modal-box bg-base-100 rounded-3xl shadow-2xl border border-base-300/20 max-w-4xl w-full p-8 ">
+      <div className="modal-box rounded-3xl shadow-2xl border border-base-300/20 max-w-4xl w-full p-8 ">
         <button
           onClick={onClose}
           className="btn btn-md btn-circle btn-outline absolute top-4 right-4 text-base-content/60 z-[1000]"
