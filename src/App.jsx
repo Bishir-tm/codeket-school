@@ -649,10 +649,11 @@ const CodeketSchoolLanding = () => {
                       </div>
                       <div>
                         <h4 className="font-bold text-lg mb-1">
-                          No Setup Fees
+                          ₦100,000 One-time setup fee Only
                         </h4>
                         <p className="text-gray-600 dark:text-gray-400 text-sm">
-                          Complete implementation included at no extra cost
+                          includes full installation, data import, staff
+                          training, and fulls support.
                         </p>
                       </div>
                     </div>
